@@ -51,7 +51,61 @@
 | 9.6 Kbps             	| 9600 bps                                           	| 1200 Bps                                  	| 20.68 paq/s                             	|
 | 19.2 Kbps            	| 19200 bps                                          	| 2400 Bps                                  	| 41.37 paq/s                             	|
 
-The current configuration 19.2 Kbps - Half duplex, the serial module to send and receive have the same address and channel.
+The current configuration 19.2 Kbps - Half duplex, the serial module to send and receive have the same address and channel. The number of result packets could be divided between nodes on the infrastructure.
+
+## Instant power consumption vs gain selected
+
+As we can see in the figure, we have 4 transmission power options, these different options directly affect the transmission gain.
+
+![Arduino DUE](img/compare_zoom_datatip.png)
+
+## Transmission time (instant power) vs packet size and energy consumption
+
+This experiment assumes that the transmission time is proportional to the instantaneous consumption pulse width. The investigation evaluates packet sizes of (1, 2, 4, 8, 16, 24, 32, 48) bytes. There are also experiments with 64 bytes packet size; in this experiment, the sender module emits two separate pulses of the transmission that don't return anything, so there is an error in the transmission (collision, error in the loopback of the other module, etc.).
+
+In these figures separated in two for clarity, it may seem that all transmissions consume and take the same time to send, let's see a figure in depth.
+
+![Arduino DUE](img/instant_power_vs_time_1_to_8_bytes.png)
+![Arduino DUE](img/instant_power_vs_time_16_to_48_bytes.png)
+
+In these figures we can see that each different packet size consumes, the most significant thing is the pulse width. As can be seen, as the packet size increases, the pulse width in power consumption increases.
+
+![Arduino DUE](img/instant_power_vs_time_1_to_8_bytes_zoom_10s.png)
+![Arduino DUE](img/instant_power_vs_time_16_to_48_bytes_zoom_10s.png)
+
+| Packet size<br>(bytes) 	| Pulse width<br>(seg) 	|
+|:----------------------:	|:--------------------:	|
+|            1           	|         0.02         	|
+|            2           	|         0.02         	|
+|            4           	|         0.03         	|
+|            8           	|         0.04         	|
+|           16           	|         0.04         	|
+|           24           	|         0.05         	|
+|           32           	|         0.06         	|
+|           48           	|         0.08         	|
+
+In the absence of a higher resolution, the result would be this as we can see a linear approximation to the size of the packet up to 58 bytes would be enough.
+
+Now, when exceeding 64 bytes, we have to send it in two different packets, generating two pulses, and therefore, two sendings.
+
+![Arduino DUE](img/instant_power_vs_time_64_bytes_zoom_5s.png)
+
+In addition, we can see a quasi-linear relationship between energy consumption and packet size.
+
+![Arduino DUE](img/energy_consumption.png)
+
+### Round time trip and dropout probability
+
+![Arduino DUE](img/RTT_DP_1bytes.png)
+![Arduino DUE](img/RTT_DP_2bytes.png)
+![Arduino DUE](img/RTT_DP_4bytes.png)
+![Arduino DUE](img/RTT_DP_8bytes.png)
+![Arduino DUE](img/RTT_DP_16bytes.png)
+![Arduino DUE](img/RTT_DP_24bytes.png)
+![Arduino DUE](img/RTT_DP_32bytes.png)
+![Arduino DUE](img/RTT_DP_48bytes.png)
+
+## How to calculate the power on the experiments
 
 ## Experiment analysis and conclusions
 
