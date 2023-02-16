@@ -93,6 +93,8 @@ Now, when exceeding 64 bytes, we have to send it in two different packets, gener
 In addition, we can see a quasi-linear relationship between energy consumption and packet size.
 
 ![Arduino DUE](img/energy_consumption.png)
+(*) Extrapolated experiment one hour data.
+
 
 ### Round time trip and dropout probability
 
@@ -105,10 +107,28 @@ In addition, we can see a quasi-linear relationship between energy consumption a
 ![Arduino DUE](img/RTT_DP_32bytes.png)
 ![Arduino DUE](img/RTT_DP_48bytes.png)
 
-## How to calculate the power on the experiments
+## More experiments - long test of 15 minuts at 5Hz packets
 
-## Experiment analysis and conclusions
+### Round time trip and dropout probability
+
+![Arduino DUE](img/RTT_DP_28bytes_5Hz.png)
+
+Extrapolated experiment one hour data.
+
+Expected intensity consumption 108.89 mA.
+
+Expected power consumption 544.48 mW.
+
+![Arduino DUE](img/RTT_DP_48bytes_5Hz.png)
+
+Extrapolated experiment one hour data.
+
+Expected intensity consumption 213.63 mA.
+
+Expected power consumption 1068.2 mW.
+
+The number of collisions (hypothesis) grows up because the RTT and period it's near, 0.2s period and RTT 0.208s.
 
 ## Future experiment
 
-- Send and receive at different channels and address.
+- Send and receive at different channels and address. (Fixed transmission modality of the modules, avoiding packet collisions, improve transmission interval, etc)
